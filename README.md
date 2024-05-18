@@ -13,9 +13,22 @@ Add it to `~/.zshrc` or `~/.bashrc`
 alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'
 ```
 After that
-```
+```shell
 cp .env.example .env
 sail artisan key:generate
 sail up -d
 sail artisan migrate
+```
+### For change port
+add `APP_PORT=82` to your `.env` and then
+```shell
+sail up -d --build
+```
+
+### If you have permissions error
+```shell
+sail root-shell
+cd ..
+chown -R sail:sail html
+exit
 ```
